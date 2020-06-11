@@ -1,0 +1,169 @@
+{{#if banners.bottom}}
+    {{#if settings.data_tag_enabled}}
+        <div class="banners" data-banner-location="bottom">
+            {{#each (limit banners.bottom_metadata 1)}}
+                <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                    <div data-event-type="promotion-click">
+                        {{{this.content}}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="banners" data-banner-location="bottom">
+            <div class="banner">
+                {{{limit banners.bottom 1}}}
+            </div>
+        </div>
+    {{/if}}
+{{/if}}
+
+{{#if settings.show_newsletter_box}}
+    <div class="footer-newsletter">
+        {{> components/common/subscription-form}}
+    </div>
+{{/if}}
+                    
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <section class="sixty-thirty">
+            <div>
+                <h5 class="footer-info-heading">Easy Returns</h5>
+                <p style="color: #000; font-size: 12px;">You can return your order with all original materials included within 30 days of delivery. We will email you a prepaid FedEx label, and deduct the cost of the return shipping from your refund amount ($5 per item flat rate). <a href="/shipping-returns-warranty-policies/" style="color: #011e41;"><strong>Details</strong></a></p>
+                <div style="text-align: center;">
+                    <a href="https://www.bbb.org/us/oh/mason/profile/bedding/downlite-0292-11258/#sealclick" target="_blank" rel="nofollow"><img src="https://seal-cincinnati.bbb.org/seals/blue-seal-200-42-bbb-11258.png" style="border: 0;" alt="Downlite BBB Business Review" /></a>
+                </div>
+            </div>
+            <div class="hide-size-tablet">
+                {{#if theme_settings.social_icons_footer}}
+                    <article data-section-type="footer-webPages">
+                        <h5 class="footer-info-heading">{{lang 'social.connect'}}</h5>
+                        {{> components/common/social-links}}
+                    </article>
+                {{/if}}
+            </div>
+        </section>
+
+        <section class="footer-info 4a616d6573">
+            {{#and theme_settings.shop_by_brand_show_footer shop_by_brand.length}}
+                <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-brands">
+                    <h5 class="footer-info-heading">
+                        {{lang 'footer.brands'}}
+                        <i class="icon" aria-hidden="true">
+                            <svg><use xlink:href="#icon-downselector" /></svg>
+                        </i>
+                    </h5>
+                    <ul class="footer-info-list">
+                        {{#each shop_by_brand}}
+                            <li>
+                                <a href="{{url}}">{{name}}</a>
+                            </li>
+                        {{/each}}
+                        <li><a href="{{urls.brands}}">{{lang 'common.view_all'}}</a></li>
+                    </ul>
+                </article>
+            {{/and}}
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-categories">
+                <h5 class="footer-info-heading">
+                    {{lang 'footer.categories'}}
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-downselector" /></svg>
+                    </i>
+                </h5>
+                <ul class="footer-info-list">
+                    {{#each categories}}
+                        <li>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                    {{#if settings.gift_certificates_enabled}}
+                        <li>
+                            <a href="{{urls.gift_certificate.purchase}}">{{lang 'common.gift_cert'}}</a>
+                        </li>
+                    {{/if}}
+                </ul>
+            </article>
+
+            <article class="footer-info-col footer-info-col-multi footer-info-col--small" data-section-type="footer-webPages">
+                <div class="footer-info-dropdown">
+                    <h5 class="footer-info-heading">
+                        Resources
+                        <i class="icon" aria-hidden="true">
+                            <svg><use xlink:href="#icon-downselector" /></svg>
+                        </i>
+                    </h5>
+                    <ul class="footer-info-list">
+                        <li><a href="/blog/">Sleep Blog</a></li>
+                        <li><a href="/bedding-buying-guide/">Bedding Guide</a></li>
+                        <li><a href="/wedding-registry/">Wedding Registry</a></li>
+                        <li><a href="/customer-reviews/">Customer Reviews</a></li>
+                        <li><a href="/rds-responsibly-sourced-down/">RDS - Responsibly Sourced Down</a></li>
+                        <li><a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a></li>
+                    </ul>
+                </div>
+                <div class="footer-info-dropdown">
+                    <h5 class="footer-info-heading">
+                        About Us
+                        <i class="icon" aria-hidden="true">
+                            <svg><use xlink:href="#icon-downselector" /></svg>
+                        </i>
+                    </h5>
+                    <ul class="footer-info-list">
+                        <li><a href="/about-downlite/">About Downlite</a></li>
+                        <li><a href="/one-percent-for-the-planet/">One Percent For The Planet</a></li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-webPages">
+                <h5 class="footer-info-heading">
+                    Support
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-downselector" /></svg>
+                    </i>
+                </h5>
+                <ul class="footer-info-list">
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/shipping-returns-warranty-policies/">Shipping & Returns</a></li>
+                    <li><a href="/contact-downlite/">Contact Downlite</a></li>
+                    <li><a href="/faq/">FAQ's</a></li>
+                    <li><a href="/warranty-policy/">Warranty Policy</a></li>
+                    <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                </ul>
+            </article>
+        </section>
+        {{#if theme_settings.geotrust_ssl_common_name}}
+            <div class="footer-geotrust-ssl-seal">
+                {{> components/common/geotrust-ssl-seal}}
+            </div>
+        {{/if}}
+        
+        <div class="hide-size-desktop">
+            {{#if theme_settings.social_icons_footer}}
+                <article data-section-type="footer-webPages" style="margin-bottom: 20px;">
+                    <h5 style="text-align: center; font-weight: 400; text-transform: none; margin-bottom: 0;">{{lang 'social.connect'}}</h5>
+                    {{> components/common/social-links}}
+                </article>
+            {{/if}}
+        </div>
+        
+        <div class="footer-copyright">
+            {{> components/common/payment-icons}}
+            {{#if theme_settings.show_copyright_footer}}
+                <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}} </p>
+            {{/if}}
+            <p class="powered-by">*Shipping to Contiguous US Only (Sorry Alaska &amp; Hawaii)</p>
+        </div>
+        
+        {{#or theme_settings.show_powered_by theme_settings.show_built_by}}
+            <div class="footer-copyright" style="font-size: 12px;">
+                {{#if theme_settings.show_powered_by}}
+                    <p class="powered-by">Powered by <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>
+                {{/if}}
+                {{#if theme_settings.show_built_by}}
+                    <p class="powered-by">Built by <a href="https://www.weizenyoung.com/" rel="nofollow">Weizen Young</a></p>
+                {{/if}}
+            </div>
+        {{/or}}
+    </div>
+</footer>

@@ -1,0 +1,75 @@
+---
+brands: true
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+shop_by_brand:
+  limit: 12
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="page page--category">
+    <section class="page-content container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{#unless theme_settings.hide_category_page_heading }}
+            <h1 class="page-heading">{{category.name}}</h1>
+            {{{region name="category_below_header"}}}
+        {{/unless}}
+        {{{category.description}}}
+    </section>
+    
+    <div class="main full">
+        <div class="container">
+            <div class="hotelNames" style="display: none;">
+               <ul class="navList">
+                    {{#each category.subcategories}}
+                    <li class="navList-item">
+                        <a class="navList-action" href="{{url}}" alt="{{name}}" title="{{name}}">
+                            <span>{{name}}</span>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            
+            <section class="hotelFinder" data-category>
+                <div class="category-description">{{{category.description}}}</div>
+                
+                <div class="category-description hotel-finder-content">
+                    <div class="textBlock hotel-finder-video" style="float: left; margin-right: 20px; width: 48%;">
+                        <div class="videoWrapper">
+                            <iframe src="https://www.youtube.com/embed/GVN84QDoatM?rel=0&amp;controls=0rel=0&amp;autoplay=1" width="560" height="315" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="textBlock hotel-finder-search">
+                        <h2 class="section-title">Search By Hotel</h2>
+                        <div class="hotelSearchWrap">
+                            <input class="hotelSearch" type="text" name="hotelSearch" placeholder="Enter the name of the hotel" isp_ignore>
+                            <button class="button button-primary">Search Hotels</button>
+                            <div class="hotelResults noResults"></div>
+                        </div>
+                    </div>
+                    <div class="textBlock hotel-finder-text">
+                        <p>If you enjoyed the <a href="https://www.downlitebedding.com/hotel-bedding/">hotel bedding</a> at a resort, hotel, cruise line or romantic bed &amp; breakfast, it was probably DOWNLITE. We offer the same <a title="hotel pillows" href="https://www.downlitebedding.com/hotel-pillows/">hotel pillows</a> and <a title="hotel comforters" href="https://www.downlitebedding.com/hotel-comforters/">hotel comforters</a> used at fine properties for your home. Most items also feature an upgraded fill or fabric with larger sizes.</p>
+                        <p>Because our items are in thousands of properties around the world, please use the search box below to help find your hotel or property. If it's is not listed, simply <a href="https://www.downlitebedding.com/contact-downlite/">contact us</a> and we will research for you. (Many large hotel chains do not like their name being on the list.)</p>
+                        <p>If you have taken a photo of the 'under penalty of law label', you should see a style number. Please note: most hotel part numbers do not translate on the site, searching may get an item that does not match. Please <a href="mailto:%20customercare@downlite.com" target="_blank">email us</a> a photo of the label so we can assist you.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

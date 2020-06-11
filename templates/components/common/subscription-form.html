@@ -1,0 +1,131 @@
+<!--
+<h5 style="color: #948982;">Be a Downlite VIP</h5>
+<h5 style="color: #221f1f;">Sign up to get first dibs on great deals!</h5>
+{{#if settings.show_newsletter_summary }}
+    <div class="footer-newsletter-summary"><p>{{settings.newsletter_summary}}</p></div>
+{{/if}}
+
+<form class="form" action="{{urls.subscribe.action}}" method="post">
+    <fieldset class="form-fieldset">
+        <input type="hidden" name="action" value="subscribe">
+        <input type="hidden" name="nl_first_name" value="bc">
+        <input type="hidden" name="check" value="1">
+        <div class="form-field">
+            <label class="form-label is-srOnly" for="nl_email">{{lang 'common.email_address'}}</label>
+            <div class="form-prefixPostfix wrap">
+                <i class="icon" aria-hidden="true">
+                    <svg><use xlink:href="#icon-mail" /></svg>
+                </i>
+                <input class="form-input" id="nl_email" name="nl_email" type="email" value="{{customer.email}}" placeholder="{{lang 'newsletter.email_placeholder'}}">
+                <input class="button form-prefixPostfix-button--postfix" type="submit" value="{{lang 'newsletter.subscribe_submit'}}">
+            </div>
+        </div>
+    </fieldset>
+</form>
+-->
+
+<h5 style="color: #948982;">Be a Downlite VIP</h5>
+<h5 style="color: #221f1f;">Sign up to get first dibs on great deals!</h5>
+{{#if settings.show_newsletter_summary }}
+    <div class="footer-newsletter-summary"><p>{{settings.newsletter_summary}}</p></div>
+{{/if}}
+
+<!--SPRINGBOT-->
+<div class="embeded-springot-form">
+<div class="embeded-springot-form-form"> 
+<table border="0" style="table-layout:fixed;border-collapse:collapse;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;" cellpadding="0" cellspacing="0" align="center" width="100%" ng-click="$ctrl.select($event)">
+    <tbody> 
+        <tr style="display:table-row;vertical-align:middle;border-width:0;border-color:transparent;border:0;background:transparent;"> 
+            <td style="border-width:0;background:transparent;background-color:#FFFFFF;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:auto;line-height:1.5;text-align:left;opacity:1;text-shadow:none;padding:0;" bgcolor="#FFFFFF"> 
+                <table class="columns" border="0" cellpadding="10" cellspacing="0" align="center" width="100%" style="table-layout:fixed;border-collapse:collapse;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"> 
+                    <tbody> 
+                        <tr style="display:table-row;vertical-align:middle;border-width:0;border-color:transparent;border:0;background:transparent;"> 
+                            <td drop-container="" drop-accepts="$ctrl.disallowColumnsAndContainers($dragData)" on-drop="$ctrl.onDrop($dragData)" on-drag-enter="$ctrl.onDragEnter($event)" on-drag-over="$ctrl.onDragOver($event, $dragData)" on-drag-leave="$ctrl.onDragLeave($event)" ng-repeat="col in $ctrl.cols track by $index" align="center" height="100%" width="1%" valign="top" style="border-width:0;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;background:transparent;background-color:transparent;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:14px;line-height:1.5;text-align:left;opacity:1;text-shadow:none;" ng-style="$ctrl.getColumnStyle($index)" class="ng-scope drop-container responsive-column"> 
+
+                                <table style="table-layout:fixed;border-collapse:collapse;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;width:100%;background-color:#ffffff;color:#000000;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;" ng-click="$ctrl.select($event)">
+                                    <tbody> 
+                                        <tr style="display:table-row;vertical-align:middle;border-width:0;border-color:transparent;border:0;background:transparent;"> 
+                                            <td bgcolor="#ffffff" style="border-width:0;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;background:transparent;background-color:transparent;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:auto;line-height:1.5;text-align:left;opacity:1;text-shadow:none;"> 
+
+                                                <form class="springmod-form ng-pristine ng-valid"> 
+                                                    <!-- ngRepeat: input in $ctrl.inputs -->
+                                                    <div class="form-group ng-scope" ng-repeat="input in $ctrl.inputs" style=""> 
+                                                        <!-- ngIf: !$ctrl.usePlaceholder --> 
+                                                        <!-- ngIf: !$ctrl.usePlaceholder --> 
+                                                        <!-- ngIf: $ctrl.usePlaceholder -->
+                                                        <label for="springmod_email" class="is-srOnly">Enter Email</label>
+                                                        <input ng-if="$ctrl.usePlaceholder" id="springmod_email" type="email" name="Email" style="width:100%;margin:0;border-width:1px;border-style:solid;border-color:#cccccc;border-radius:1px;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;height:32px;line-height:1.5;padding:0px 9px 0px 9px;box-sizing:border-box;background-color:#ffffff;color:#000000;" placeholder="Email" ondrop="event.preventDefault ? event.preventDefault() : event.returnValue = false" ng-required="$ctrl.nameRequired || input.type === \'email\'" class="ng-scope" required="required">
+                                                        <!-- end ngIf: $ctrl.usePlaceholder --> 
+                                                    </div> 
+                                                    <!-- end ngRepeat: input in $ctrl.inputs --> 
+
+                                                    <div class="form-group">
+                                                        <table style="table-layout:fixed;border-collapse:collapse;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;width:100%;background-color:#ffffff;color:#000000;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;">
+                                                            <tbody> 
+                                                                <tr style="display:table-row;vertical-align:middle;border-width:0;border-color:transparent;border:0;background:transparent;"> 
+                                                                    <td style="border-width:0;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;background:transparent;background-color:#ffffff;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:auto;line-height:1.5;opacity:1;text-shadow:none;"> 
+                                                                        <!-- ngIf: $ctrl.googleSiteKey && $ctrl.useCaptcha && $ctrl.canUseCaptcha --> 
+                                                                        <input id="springmod_submit" class="springmod_submit button button-primary" value="Submit" type="submit"> 
+                                                                    </td> 
+                                                                </tr> 
+                                                                <!-- ngIf: $ctrl.showPrivacy && $ctrl.canUsePrivacyLink -->
+                                                            </tbody> 
+                                                        </table> 
+                                                    </div> 
+                                                    <!-- ngIf: $ctrl.showRestriction && $ctrl.canUseDoNotProcessDetails --> 
+
+                                                    <div class="springmod-spinner" id="springmod_spinner"></div> 
+                                                </form> 
+                                            </td> 
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                            </td> 
+                            <!-- end ngRepeat: col in $ctrl.cols track by $index --> 
+                        </tr>
+                    </tbody> 
+                </table> 
+            </td> 
+        </tr>
+    </tbody> 
+</table> 
+</div>
+
+    <div class="embeded-springot-form-success" style="display:none"> 
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" ng-click="$ctrl.select($event)" style="table-layout:fixed;border-collapse:collapse;border-width:0px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;width:100%;max-width:100%;height:auto;border-style:solid;border-spacing:0;border-color:#000000;">
+            <tbody> 
+                <tr> 
+                    <td style="border-width:0;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;background:transparent;background-color:transparent;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:auto;line-height:1.5;text-align:left;opacity:1;text-shadow:none;" bgcolor="#FFFFFF"> 
+                        <table class="content" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="table-layout:fixed;border-collapse:collapse;border-width:0px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;width:100%;max-width:100%;height:auto;border-style:solid;border-spacing:0;border-color:#000000;">
+                            <tbody> 
+                                <tr> 
+                                    <td drop-container="" drop-accepts="$ctrl.disallowColumnsAndContainers($dragData)" on-drop="$ctrl.onDrop($dragData)" on-drag-enter="$ctrl.onDragEnter($event)" on-drag-over="$ctrl.onDragOver($event, $dragData)" on-drag-leave="$ctrl.onDragLeave($event)" align="center" height="100%" width="100%" valign="top" style="border-width: 0px; padding: 0px; background: rgb(255, 255, 255); color: rgb(255, 255, 255); box-shadow: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 300; font-style: normal; text-transform: none; text-decoration: none; height: 14px; line-height: 1.5; text-align: left; opacity: 1; text-shadow: none; padding: 0; margin: 0px;" class="drop-container"> 
+                                        <table border="0" style="table-layout:fixed;border-collapse:collapse;border-width:0;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;" cellpadding="0" cellspacing="0" align="center" width="100%" ng-click="$ctrl.select($event)"> <tbody> 
+                                            <tr style="display:table-row;vertical-align:middle;border-width:0;border-color:transparent;border:0;background:transparent;"> 
+                                                <td style="border-width:0;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;background:transparent;background-color:#ffffff;color:#000000;box-shadow:none;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;font-style:normal;text-transform:none;text-decoration:none;height:auto;line-height:1.5;text-align:left;opacity:1;text-shadow:none;" bgcolor=""> 
+
+                                                    <div ng-bind-html="$ctrl.trustedText" class="ng-binding">
+                                                        <h1 style="text-align: center; margin-top: 0;"><span style="font-family:Verdana;">Thank You!</span></h1> 
+
+                                                        <p style="text-align: center;"><span style="font-family:Verdana;">You are now subscribed to our VIP email list. Here is a coupon code you can use right now to save 10% = <strong><span style="color:#3498db;">SIGNUP10</span></strong></span></p> 
+
+                                                        <p style="text-align: center;"><span style="font-family:Verdana;"><em>Follow us to stay in touch.</em></span></p> 
+                                                        <!-- START SOCIAL --> 
+
+                                                        <p style="text-align: center;"><a href="https://www.facebook.com/DOWNLITE/" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32697/content_facebook_G.png" style="width: 36px; height: 36px;"></a><a href="https://www.instagram.com/downlitebedding/" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32698/content_instagram_G.png" style="width: 36px; height: 36px;"></a><a href="https://twitter.com/downlite" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32699/content_twitter_G.png" style="width: 36px; height: 36px;"></a><a href="https://www.pinterest.com/downlitebedding/" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32700/content_pinterest_G.png" style="width: 36px; height: 36px;"></a><a href="https://www.youtube.com/downlitebedding" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32701/content_youtube_G.png" style="width: 36px; height: 36px;"></a><a href="https://plus.google.com/+DownLiteBedding" target="_blank"><img alt="" src="https://s3.amazonaws.com/springbot_www_production/ckeditor_assets/pictures/32702/content_googleplu_G.png" style="width: 36px; height: 36px;"></a><!-- END SOCIAL --></p> 
+                                                    </div> 
+                                                </td> 
+                                            </tr>
+                                        </tbody> 
+                                    </table> 
+                                </td> 
+                            </tr>
+                        </tbody> 
+                    </table> 
+                </td> 
+            </tr>
+        </tbody> 
+    </table> 
+</div>
+</div>
+

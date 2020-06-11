@@ -1,0 +1,63 @@
+---
+cart: true
+---
+{{#partial "page"}}
+<div class="page cart-page">
+    <div class="container">
+        <main class="page-content" data-cart>
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    
+            {{> components/cart/page-title}}
+    
+            <div data-cart-status>
+                {{> components/cart/status-messages}}
+            </div>
+    
+            {{#if cart.items.length}}
+                <div class="loadingOverlay"></div>
+    
+                <div data-cart-content>
+                    {{> components/cart/content}}
+                </div>
+    
+                <div data-cart-totals>
+                    {{> components/cart/totals}}
+                    {{#if cart.show_primary_checkout_button}}
+                        <div class="cart-actions">
+                            <a class="button button--primary" href="{{urls.checkout.single_address}}" title="{{lang 'cart.checkout.title'}}">{{lang 'cart.checkout.button'}}</a>
+                            {{#if cart.show_multiple_address_shipping}}
+                                <a class="checkoutMultiple" href="{{urls.checkout.multiple_address}}">
+                                    {{lang 'cart.preview.checkout_multiple'}}
+                                </a>
+                            {{/if}}
+                        </div>
+                    {{else}}
+                        <div class="cart-actions">
+                            <a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+                        </div>
+                    {{/if}}
+        
+                    {{#if cart.additional_checkout_buttons}}
+                        <div class="cart-additionalCheckoutButtons">
+                            {{#each cart.additional_checkout_buttons}}
+                                {{{this}}}
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                </div>
+                
+                <div class="continue-shopping">
+                    <a href="{{urls.home}}">{{lang 'cart.continue_shopping'}}</a><br><br>
+                    <p style="text-align: center;">You can return your order with all original materials included within 30 days of delivery. We will email you a prepaid FedEx label, and deduct the cost of the return shipping from your refund amount ($5 per item flat rate).<br><a href="/shipping-returns-warranty-policies/" style="color:#00adef;"><strong>Full Shipping and Return Details</strong></a></p>
+                    <a href="https://www.bbb.org/us/oh/mason/profile/bedding/downlite-0292-11258/#sealclick" target="_blank" rel="nofollow"><img src="https://seal-cincinnati.bbb.org/seals/blue-seal-200-42-bbb-11258.png" style="border: 0;" alt="Downlite BBB Business Review" /></a>
+                    <script src="https://cdn.ywxi.net/js/inline.js?w=90"></script>
+                    <javascript:void(showModal('#popup-htmlcode-eng'));>
+                </div>
+            {{else}}
+                <h3>{{lang 'cart.checkout.empty_cart'}}</h3>
+            {{/if}}
+        </main>
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}
