@@ -64,7 +64,7 @@
         </ul>
     </section>
     <section class="productView-details">
-        <div class="productView-product">
+        <div class="productView-product" style="border-bottom: 1px solid #d2d2d2; margin-bottom: 7px;">
             {{#if page_type '===' 'product'}}
                 {{#or product.price.non_sale_price_with_tax product.price.non_sale_price_without_tax}}
                     <div class="sale-flag-side">
@@ -79,25 +79,7 @@
                     <a href="{{product.brand.url}}"{{#if schema}} itemprop="url"{{/if}}><span{{#if schema}} itemprop="name"{{/if}}><strong>{{product.brand.name}}</strong></span></a>
                 </span>
             {{/if}}
-            {{#if product.sku}}
-                <div class="productSKU">
-                    <dt class="productView-info-name sku-label">{{lang 'products.sku'}}</dt>
-                    <dd class="productView-info-value" data-product-sku{{#if schema}} itemprop="sku"{{/if}}>{{product.sku}}</dd>
-                </div>
-            {{/if}}
-            {{#and product.sku product.upc}}<span style="position:relative; padding: 0 3px; top: -1px;">|</span>{{/and}}
-            {{#if product.upc}}
-                <div class="productUPC">
-                    <dt class="productView-info-name upc-label">{{lang 'products.upc'}}</dt>
-                    <dd class="productView-info-value" data-product-upc>{{product.upc}}</dd>
-                </div>
-            {{/if}}
-            {{#if product.availability}}
-                <div>
-                    <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
-                    <dd class="productView-info-value">{{product.availability}}</dd>
-                </div>
-            {{/if}}
+            
             {{#if product.call_for_price}}
                 <p class="productView-price">
                     <span>{{product.call_for_price}}</span>
@@ -200,12 +182,33 @@
             </div>
             {{product.detail_messages}}
         </div>
-        {{#and product.warranty theme_settings.show_short_desc}}
-            <div class="productView-warranty">
-                {{{product.warranty}}}
+
+        {{#if product.sku}}
+            <div>
+                <dt class="productView-info-name">{{lang 'products.sku'}}</dt>
+                <dd class="productView-info-value" data-product-sku{{#if schema}} itemprop="sku"{{/if}}>{{product.sku}}</dd>
             </div>
-        {{/and}}
-        <div class="productView-options">
+        {{/if}}
+        {{#if product.availability}}
+            <div>
+                <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
+                <dd class="productView-info-value">{{product.availability}}</dd>
+            </div>
+        {{/if}}
+
+        <div class="productView-options" style="border-top: 1px solid #d2d2d2; margin-top: 7px; padding-top: 7px;">
+            {{#if product.description}}
+                <div class="tab-product-description">
+                    {{{product.description}}}
+                    {{{snippet 'product_description'}}}
+                </div>
+            {{/if}}
+            {{#and product.warranty theme_settings.show_short_desc}}
+                <div class="productView-warranty">
+                    {{{product.warranty}}}
+                </div>
+            {{/and}}
+        
             <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
                   data-cart-item-add>
                 <input type="hidden" name="action" value="add">

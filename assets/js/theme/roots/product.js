@@ -17,4 +17,10 @@ export default function loaded() {
         const headerHeight = $('.header').height();
         $(window).scrollTop(formTop - headerHeight);
     });
+
+    // custom other details in description
+    if( $('.tab-product-description .other-details').length > 0 ){
+        $('.learnMore').append( $('.tab-product-description .other-details') );
+        $('.accordion-block--learn-more').show();
+    }
 }
