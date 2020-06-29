@@ -84,7 +84,7 @@
     "show_product_reviews_tabs": false,
     "show_custom_fields_tabs": false,
     "show_product_weight": true,
-    "show_product_dimensions": true,
+    "show_product_dimensions": false,
     "product_list_display_mode": "grid",
     "logo-position": "left",
     "logo_size": "120x57",
