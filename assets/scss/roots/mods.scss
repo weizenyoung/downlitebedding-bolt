@@ -140,7 +140,10 @@ h1, h2, h3, h4, h5, h6{
 .center{text-align: center;}
 a{text-decoration: none;}
 
-.breadcrumbs{display: block;}
+.breadcrumbs{
+    display: block;
+    margin-bottom: 10px;
+}
 
 .breadcrumbs,
 .body:not(.home) .page-heading{text-align: left;}
@@ -332,17 +335,15 @@ footer .socialLinks{
 .card:hover .card-figcaption{
     height: auto;
     max-height: 300px;
-    padding: 20px;
-    z-index: 5;
+    padding: 10px;
+    z-index: 20;
 }
 
 .card-figcaption{
-    background: stencilColor("card--alternate-backgroundColor");
-    border: 1px solid $card-image-border;
-    border-top: 0;
-    bottom: auto;
+    border: 0;
+    bottom: 0;
     height: auto;
-    top: 100%;
+    top: auto;
     opacity: 1;
     height: 0;
     overflow: hidden;
@@ -391,7 +392,6 @@ footer .socialLinks{
     padding: 12px 15px;
 }
 
-.card-figcaption--action-buttons .quickview{margin-right: 10px;}
 .card .card-body{
     display: flex;
     flex: 1 1 auto;
@@ -1073,7 +1073,12 @@ footer a:hover{
 .heroCarousel a{
     text-decoration: none;
 }
-.heroCarousel.slick-slider{margin-bottom: 0;}
+.heroCarousel.slick-slider{
+    margin-bottom: 0;
+    width: 1290px;
+    max-width: 100%;
+    min-width: auto;
+}
 
 .slick-slide{height: auto;}
 
@@ -1210,6 +1215,8 @@ footer a:hover{
 // CATEGORY PAGE
 .page--category h1{
     text-transform: stencilString('category_name_capitalization');
+    line-height: normal;
+    margin-bottom: 10px;
 }
 .facetedSearch-refineFilters{margin-bottom: 15px;}
 .facetedSearch .toggleSidebarBlock:not(.facetedSearch-toggle){
@@ -2048,6 +2055,13 @@ li.pagination-item--previous a{
     }
 
     // CATEGORY PAGE
+    .page-sidebar + .page-content,
+    .page-sidebar + .page-content + .page-content{
+        width: 75%;
+        float: left;
+        padding: 0 0 0 15px;
+    }
+    
     .page-sidebar{
         border: 1px solid $card-image-border;
         padding: 20px 20px 0;
@@ -2155,7 +2169,12 @@ li.pagination-item--previous a{
     }
 }
 @media only screen and (max-width: 800px) {
+    // general
     .hide-size-tablet{display: none !important;}
+    
+    h1, .main-heading{font-size: 24px;}
+    h2{font-size: 22px;}
+    h3{font-size: 18px;}
 
     // header
     .headerBanner{
@@ -2647,6 +2666,17 @@ li.pagination-item--previous a{
     }
 
     // category page
+    .page--category > .main > .container{
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .page--category .page-content{order: 1;}
+    .page--category .page-sidebar{order: 2; margin-bottom: 20px;}
+    .page--category #product-listing-container{order: 3;}
+    
+    .actionBar-section .form-field,
+    .pagination-list{margin-bottom: 15px;}
+
     .page-sidebar{padding: 0;}
     .sidebar-nav-mobile{
         display: flex;
@@ -2745,7 +2775,7 @@ li.pagination-item--previous a{
     
     .sort-and-pagination .actionBar-section select{
         width: 100%;
-        max-width: calc(100% - 65px);
+        max-width: calc(100% - 80px);
     }
     
     .sort-and-pagination > *{
