@@ -32,6 +32,120 @@
     
     {{{ footer.scripts }}}
 </div>
+
+<script type="text/javascript">
+    // bazaarvoice
+    
+    var parseCurrency = function parseCurrency(price) {
+        return parseFloat(price).toFixed(2);
+    };
+
+    var parseTaxes = function parseTaxes(taxesArray) {
+        var taxes = taxesArray.reduce(function (previousTotal, currentTax) {
+            return previousTotal + parseFloat(currentTax.amount);
+        }, 0);
+
+        return !isNaN(taxes) ? taxes : 0;
+    };
+
+    async function fetchParentSKU(productId) {
+        const url = `{{ settings.secure_base_url }}/products.php?productId=${productId}`;
+        const data = await getRequest(url, {'stencil-options': '{"render_with":"product/parent-sku"}'});
+        return data;
+    }
+
+    async function BVproductData(productInfo) {
+        return {
+            "name" : String(productInfo.name),
+            "price" : String(parseCurrency(productInfo.salePrice)),
+            "quantity" : String(productInfo.quantity),
+            "sku" : String(await fetchParentSKU(productInfo.productId)),
+        };
+    }
+
+    async function processData(orderInfo) {
+        var keyTypes = ['giftCertificates', 'physicalItems', 'customItems', 'digitalItems'];
+        var produdctDataArr = [];
+        var lineItems = orderInfo.lineItems;
+
+        var report = {
+            "currency": String(orderInfo.currency.code),
+            "orderId": String(orderInfo.orderId),
+            "total": String(parseCurrency(orderInfo.orderAmount)),
+            "tax": String(parseCurrency(parseTaxes(orderInfo.taxes))),
+            "shipping": String(parseCurrency(orderInfo.shippingCostTotal)),
+            "items": [],
+            "email": String(orderInfo.billingAddress.email),
+            "locale": "en_US",
+            "nickname": String(orderInfo.billingAddress.firstName)
+        };
+
+        for (var i = 0; i < keyTypes.length; i++) {
+            var keyType = keyTypes[i];
+            var lineItemArray = lineItems[keyType] || [];
+
+            for (var j = 0; j < lineItemArray.length; j++) {
+                var lineItem = lineItemArray[j];
+                report.items.push(await BVproductData(lineItem));
+            }
+        }
+
+        return report;
+    }
+
+    function getAjax(url, success, headers = {}) {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        xhr.open('GET', url);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState > 3 && xhr.status == 200) success(xhr.responseText);
+        };
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('Content-Type', 'application/xml');
+
+        Object.keys(headers).forEach((key) => {
+            xhr.setRequestHeader(key, headers[key]);
+        });
+
+        xhr.send();
+        return xhr;
+    }
+
+    function getRequest(url, headers = {}) {
+        return new Promise((resolve) => {
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            xhr.open('GET', url);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState > 3 && xhr.status == 200){
+                    resolve(xhr.responseText);
+                }
+            };
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Content-Type', 'application/xml');
+
+            Object.keys(headers).forEach((key) => {
+                xhr.setRequestHeader(key, headers[key]);
+            });
+
+            xhr.send();
+        });
+    }
+
+    var endPoint = '{{ settings.secure_base_url }}/api/storefront/orders/{{ checkout.order.id }}';
+
+    async function callBV() {
+        const data = await getRequest(endPoint);
+        const report = await processData(JSON.parse(data));
+        console.log(report);
+
+        window.bvCallback = function (BV) {
+            BV.pixel.trackTransaction(report);
+        };
+    }
+
+    callBV();
+</script>
+
+
 {{/partial}}
 
 {{> layout/empty}}

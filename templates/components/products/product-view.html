@@ -80,6 +80,8 @@
                 </span>
             {{/if}}
             
+            <div data-bv-show="rating_summary" data-bv-product-id="{{product.sku}}"></div>
+            
             {{#if product.call_for_price}}
                 <p class="productView-price">
                     <span>{{product.call_for_price}}</span>
@@ -187,12 +189,6 @@
             <div>
                 <dt class="productView-info-name">{{lang 'products.sku'}}</dt>
                 <dd class="productView-info-value" data-product-sku{{#if schema}} itemprop="sku"{{/if}}>{{product.sku}}</dd>
-            </div>
-        {{/if}}
-        {{#if product.availability}}
-            <div>
-                <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
-                <dd class="productView-info-value">{{product.availability}}</dd>
             </div>
         {{/if}}
 

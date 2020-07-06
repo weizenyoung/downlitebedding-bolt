@@ -64,6 +64,39 @@ product:
                 </div>
             {{/gt}}
         {{/if}}
+        
+        <div data-bv-show="reviews" data-bv-product-id="{{product.sku}}"></div>
+        <div data-bv-show="questions" data-bv-product-id="{{product.sku}}"></div>
     </div>
 {{/partial}}
 {{> layout/base}}
+
+<script async type="text/javascript">
+    let prodDescContainer = document.getElementsByClassName("tab-product-description")[0];
+    let productDesc = prodDescContainer.textContent.replace(/[|&;$%@"<>()+\n,]/g, "").trim();
+    let upcs = document.getElementById('ProductWarranty').textContent.split(/[|]/g,);
+
+    window.bvDCC = {
+        catalogData: {
+            locale: "en_US",
+            catalogProducts: [{
+                "productId":"{{product.sku}}",
+                "productName":"{{product.title}}",
+                {{#if product.description}}"productDescription":productDesc,{{/if}}
+                "productImageURL":"{{getImage product.main_image}}",
+                "productPageURL":"{{product.url}}",
+                {{#if product.brand.name}}"brandName":"{{product.brand.name}}",{{/if}}
+                {{#if product.warranty}}"upcs":upcs,{{/if}}
+                {{#if product.mpn}}"manufacturerPartNumbers":["{{product.mpn}}"],{{/if}}
+                {{#if product.upc}}"family": "{{product.upc}}"{{/if}}
+            }]
+        }
+    };
+    window.bvCallback = function (BV) {
+        BV.pixel.trackEvent("CatalogUpdate", {
+            type: 'Product',
+            locale: window.bvDCC.catalogData.locale,
+            catalogProducts: window.bvDCC.catalogData.catalogProducts
+        });
+    };
+</script>
