@@ -30,6 +30,35 @@
     </header>
     {{{ checkout.order_confirmation_content }}}
     
+    <!-- Bolt addition -->
+    <script>
+        var checker = function(){
+            setTimeout(function(){
+                var badMessage = document.querySelector(".orderConfirmation-section p:nth-child(2)");
+                if(badMessage && badMessage.innerHTML.indexOf("Your order was sent to us but is currently awaiting payment") != -1){
+                    badMessage.remove();
+                }
+                else{
+                    checker();
+                }
+            }, 500);
+        }
+        checker();
+    </script>
+    <script>
+        setInterval(function() {
+            var tags = document.getElementsByClassName("orderConfirmation-section");
+            for (var i = 0; i < tags.length; i++) {
+                var elm = tags[i];
+                var txt = elm.innerText || elm.innerHTML;
+                if (txt.includes("pay by check") || txt.includes("Bolt")) {
+                    elm.style.display = 'none';
+                }
+            }
+        }, 200);
+    </script>
+    <!-- End BOlt addition -->
+    
     {{{ footer.scripts }}}
 </div>
 

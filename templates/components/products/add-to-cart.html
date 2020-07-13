@@ -1,3 +1,14 @@
+<!-- Bolt PPC addition -->
+<script
+  id="bolt-connect"
+  type="text/javascript"
+  src="https://connect.bolt.com/connect-bigcommerce.js"
+  data-publishable-key="irGDK8m77NGC.hndlniMC-ZWK.00ff48564da9e5560a57b0d1b3c2050d2ef686b7e9f16423c4c1888a9d22e281"
+  data-shopping-cart-id="BigCommerce"
+  data-storefront-api-token="{{settings.storefront_api.token}}">
+</script> 
+
+<!-- End Bolt PPC addition -->
 <div class="form-field form-field--increments">
     <label class="form-label form-label--alternate"
            for="qty[]">{{lang 'products.quantity'}}</label>
@@ -62,4 +73,34 @@
         <input id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit"
             value="{{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}">
     </div>
+    <!-- Bolt PPC addition -->
+    {{#if product.out_of_stock}}
+    {{else}}
+        <div id="product-page-checkout-wrapper" class="bolt-button-wrapper">
+            <div class="bolt-product-checkout-button bolt-multi-step-checkout"></div>
+        </div>
+
+    {{/if}}
+
+    <script>
+        var checker = function() {
+            var boltBtn = document.getElementById('product-page-checkout-wrapper');
+            setTimeout(function(){
+                if(window.stencilUtils && window.stencilUtils.hooks){
+                    window.stencilUtils.hooks.on('product-options-change-remote', (data) => {
+                        if (data.response.data.instock) {
+                            boltBtn.style.display = 'block';
+                        } else {
+                            boltBtn.style.display = 'none';
+                        }
+                    });
+                }
+                else{
+                    checker();
+                }
+            }, 500);
+        }
+        checker();
+    </script>
+    <!-- End Bolt PPC addition -->
 {{/or}}

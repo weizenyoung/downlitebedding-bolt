@@ -1,13 +1,22 @@
+<!-- Bolt addition -->
+<script
+  id="bolt-connect"
+  type="text/javascript"
+  src="https://connect.bolt.com/connect-bigcommerce.js"
+  data-publishable-key="irGDK8m77NGC.hndlniMC-ZWK.00ff48564da9e5560a57b0d1b3c2050d2ef686b7e9f16423c4c1888a9d22e281"
+  data-shopping-cart-id="BigCommerce">
+</script>
+<!-- End Bolt addition -->
 <div class="previewCart">
     <div class="previewCartAction">
         {{#if cart.show_primary_checkout_button}}
-            <div class="previewCartAction-checkout">
-                <a href="{{urls.checkout.single_address}}" class="button button--small button--primary">
-                    {{lang 'cart.preview.checkout_now'}}
-                </a>
-            </div>
+            <!--<div class="previewCartAction-checkout">-->
+                <!--<a href="{{urls.checkout.single_address}}" class="button button--small button--primary">-->
+                <!--    {{lang 'cart.preview.checkout_now'}}-->
+                <!--</a>-->
+            <!--</div>--> 
         {{/if}}
-        <div class="previewCartAction-viewCart{{#unless cart.show_primary_checkout_button}} previewCartAction-viewCart--sole{{/unless}}">
+        <div class="previewCartAction-viewCart{{#unless cart.show_primary_checkout_button}} previewCartAction-viewCart--sole{{/unless}}" style="width: 100%">
             <a href="{{urls.cart}}" class="button button--small button--action">
                 {{lang 'cart.preview.view_cart'}}
             </a>
@@ -63,6 +72,14 @@
                 <div class="cart-preview-total-price-label">Subtotal</div>
                 <div class="cart-preview-total-price">&nbsp; <strong>{{{cart.sub_total.formatted}}}</strong></div>
             </div>
+            <!-- Bolt addition -->
+            <!--<div class="bolt-button-wrapper" style="margin: 15px">-->
+                <!--<div class="bolt-checkout-button bolt-multi-step-checkout with-cards full-width flexible responsive" style="width: 100% !important;"></div>-->
+            <!--</div>-->
+            <div data-tid="instant-bolt-checkout-button" style="margin: 15px">
+                <object data='https://connect.bolt.com/v1/checkout_button?publishable_key=irGDK8m77NGC.hndlniMC-ZWK.00ff48564da9e5560a57b0d1b3c2050d2ef686b7e9f16423c4c1888a9d22e281'></object>
+            </div>
+            <!-- End BOlt addition -->
         </div>
     {{else}}
         <div class="previewCart-emptyBody">
@@ -70,3 +87,24 @@
         </div>
     {{/if}}
 </div>
+<!-- Bolt addition -->
+<script>
+    if (window.BoltCheckout && window.BoltCheckout.reloadBigCommerceCart) {
+        window.BoltCheckout.reloadBigCommerceCart();
+    } else {
+        console.log("window.BoltCheckout.reloadBigCommerceCart is not defined");
+    }
+</script>
+<script>
+	window.addEventListener("BoltBigcommerceConnectReady", function(e) {
+		window.BoltCheckout.setClientCustomCallbacks({
+      success : function(trx){
+          fbq('track', 'Purchase', {
+              value: trx.amount.amount / 100.0,
+              currency: 'USD',
+          });
+      }
+		});
+  });
+</script>
+<!-- End Bolt addition -->
