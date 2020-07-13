@@ -2,6 +2,15 @@
 cart: true
 ---
 {{#partial "page"}}
+<!-- Bolt addition -->
+<script
+  id="bolt-connect"
+  type="text/javascript"
+  src="https://connect.bolt.com/connect-bigcommerce.js"
+  data-publishable-key="irGDK8m77NGC.hndlniMC-ZWK.00ff48564da9e5560a57b0d1b3c2050d2ef686b7e9f16423c4c1888a9d22e281"
+  data-shopping-cart-id="BigCommerce">
+</script>
+<!-- End Bolt addition -->
 <div class="page cart-page">
     <div class="container">
         <main class="page-content" data-cart>
@@ -22,9 +31,15 @@ cart: true
     
                 <div data-cart-totals>
                     {{> components/cart/totals}}
+                </div>   
                     {{#if cart.show_primary_checkout_button}}
                         <div class="cart-actions">
-                            <a class="button button--primary" href="{{urls.checkout.single_address}}" title="{{lang 'cart.checkout.title'}}">{{lang 'cart.checkout.button'}}</a>
+                            <!--<a class="button button--primary" href="{{urls.checkout.single_address}}" title="{{lang 'cart.checkout.title'}}">{{lang 'cart.checkout.button'}}</a>-->
+                            <!-- Bolt addition -->
+                            <div data-tid="instant-bolt-checkout-button">
+                            <object data='https://connect.bolt.com/v1/checkout_button?publishable_key=irGDK8m77NGC.hndlniMC-ZWK.00ff48564da9e5560a57b0d1b3c2050d2ef686b7e9f16423c4c1888a9d22e281'></object>
+                            </div>
+                            <!-- End Bolt addition -->
                             {{#if cart.show_multiple_address_shipping}}
                                 <a class="checkoutMultiple" href="{{urls.checkout.multiple_address}}">
                                     {{lang 'cart.preview.checkout_multiple'}}
@@ -44,7 +59,7 @@ cart: true
                             {{/each}}
                         </div>
                     {{/if}}
-                </div>
+                
                 
                 <div class="continue-shopping">
                     <a href="{{urls.home}}">{{lang 'cart.continue_shopping'}}</a><br><br>
@@ -59,5 +74,38 @@ cart: true
         </main>
     </div>
 </div>
+<!-- Bolt addition -->
+<script>
+    var config = { childList: true, subtree: true };
+    var totalClassName = "cart-total-grandTotal";
+    var bigCommerceTotalPrice = "";
+    var callback = function(mutationsList) {
+				setTimeout(function(){
+					var elms = document.getElementsByClassName(totalClassName);
+	        if (elms.length == 0) {
+	            return;
+	        }
+	        var newPrice = elms[0].innerHTML;
+	        if (newPrice !== bigCommerceTotalPrice && window.BoltCheckout && window.BoltCheckout.reloadBigCommerceCart) {
+	            window.BoltCheckout.reloadBigCommerceCart();
+	        }
+	        bigCommerceTotalPrice = newPrice;
+				}, 200);
+    };
+    new MutationObserver(callback).observe(document.body, config);
+</script>
+<script>
+	window.addEventListener("BoltBigcommerceConnectReady", function(e) {
+		window.BoltCheckout.setClientCustomCallbacks({
+      success : function(trx){
+          fbq('track', 'Purchase', {
+              value: trx.amount.amount / 100.0,
+              currency: 'USD',
+          });
+      }
+		});
+  });
+</script>
+<!--End Bolt addition--> 
 {{/partial}}
 {{> layout/base}}
